@@ -54,16 +54,8 @@ int main(){
         if(tmp == 0) break;
         tree_inserir(teste, tmp);
     }
-    printf("Altura: %d\n", tree_height(teste));
-    printf("Remover: \n");
 
-    while (1) {
-      scanf("%d", &tmp);
-      if(tmp == 0) break;
-      tree_remove(teste, tmp);
-    }
-
-    printf("Altura: %d\n", tree_height(teste));
+    //TESTE
 
     return 0;
 }
@@ -247,4 +239,32 @@ void tree_free(tree * root){
     tree_free(&(*root)->right);
     free(*root);
   }
+}
+
+//------------------------------------------------------
+//------------------------------------------------------
+//SEM RECURSÃO
+//------------------------------------------------------
+//------------------------------------------------------
+
+
+
+//INSERIR SEM RECURSÃO
+//------------------------------------------------------
+
+
+void tree_insert_sem_recursao(tree * root, int value){
+  printf("Passou aqui");
+  tree * aux = root;
+  while(value < (*aux)->value && (*aux)!=NULL){
+    printf("Passou em %d\n", ((*aux))->value);
+    (*aux) = (*aux)->left;
+  }
+  while(value > (*aux)->value && (*aux)!=NULL){
+    printf("Passou em %d\n", ((*aux))->value);
+    (*aux) = (*aux)->right;
+  }
+  node * new = node_start(value);
+  (*aux) = new;
+  printf("%d inserido\n", (*root)->value);
 }

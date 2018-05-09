@@ -20,7 +20,7 @@ int compare(int a, int b);
 
 heap * heap_start(int size);
 int get_parent(int i);
-void heap_up(heap * h);
+void heap_up(heap * h, int i);
 void heap_down(heap * h, int i);
 void heap_insert(heap * h, int value);
 void heap_remove(heap * h, int value);
@@ -38,18 +38,25 @@ int main(){
 
   int temp = 1, size = 10;
 
-  int numeros[size];
+  heap * h = heap_start(size);
 
-  for(int i=0;i<size;i++){
+  while(1){
     scanf("%d", &temp);
-    numeros[i] = temp;
+    if(temp == 0) break;
+    heap_insert(h,temp);
+    printf("\n\n");
+    heap_print(h,0,0);
   }
 
-  printf("\nEntrada\n");
-  for(int i=0;i<size;i++) printf((i==size-1)? "%d\n" : "%d ",numeros[i]);
-  printf("\nSaida\n");
-  heap_sort(numeros, size);
-  //heap_print(h,0,0);
+  printf("Remover: \n" );
+
+  while(1){
+    scanf("%d\n", &temp);
+    if(temp == 0) break;
+    heap_remove(h,temp);
+    printf("\n\n");
+    heap_print(h,0,0);
+  }
 
 
 }
@@ -83,17 +90,16 @@ void heap_insert(heap * h, int value){
 
   if(h->length >= h->size) return;
 
-  h->values[h->length++] = value;
+  h->values[h->length] = value;
 
-  heap_up(h);
+  heap_up(h, h->length++);
 
 }
 
-void heap_up(heap * h){
-  int i = h->length-1;
+void heap_up(heap * h, int i){
   int parent = get_parent(i);
 
-  while( i > 0 && (h->values[i] < h->values[parent]) ){
+  while( i > 0 && (h->values[i] > h->values[parent]) ){
     //SWAP
     int temp = h->values[i];
     h->values[i] = h->values[parent];
@@ -115,7 +121,7 @@ void heap_down(heap * h, int pai){
   else
     filho = 2*pai+2;
 
-  while(filho <= h->length-1 && (h->values[pai] > h->values[filho])){
+  while(filho <= h->length-1 && (h->values[pai] < h->values[filho])){
 
     //SWAP
     int temp = h->values[pai];
@@ -138,9 +144,12 @@ void heap_remove(heap * h, int value){
   h->values[i] = h->values[h->length-1];
   h->values[h->length-1] = -1;
   h->length--;
-  heap_down(h, i);
+
   printf("\n\nRemovido: %d\n", valor);
-  heap_print(h,0,0);
+
+  heap_down(h, i);
+
+  heap_up(h, i);
 }
 
 
