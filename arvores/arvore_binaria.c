@@ -204,10 +204,11 @@ int tree_largura(node * root){
 //PERCURSO PRE-ORDEM
 
 void tree_preOrdem(tree * root){
-  if((*root)!=NULL)
+  if((*root)!=NULL){
     printf("%d ", (*root)->value);
     tree_preOrdem(&(*root)->left);
     tree_preOrdem(&(*root)->right);
+  }
 }
 
 //IN-ORDEM
