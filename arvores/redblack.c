@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <time.h>
+
 
 struct Node{
 	int key;
@@ -223,14 +226,24 @@ int main(){
 	
 
 	int temp, i;
-	tree root = new_tree();
+	tree root1 = new_tree();
+	srand(time(NULL));
 
-	while(true){
-		scanf("%d", &temp);
-		if(temp == 0) break;
-		insert(root,temp);
+	for(i=0;i<30;i++){
+		insert(root1,rand() % 1000);
 	}
-	rb_print_lvl(*root,0);
+	printf("Arvore 1: \n");
+	rb_print_lvl(*root1,0);
+
+
+	tree root2 = new_tree();
+
+	for(i=0;i<30;i++){
+		insert(root2,rand() % 1000);
+	}
+	printf("\n\n\nArvore 2: \n");
+	rb_print_lvl(*root2,0);
+
 
 	return 0;
 }

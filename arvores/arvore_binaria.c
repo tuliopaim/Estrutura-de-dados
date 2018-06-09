@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdlib.h>
+#include <time.h>
 
 /*
     BIBLIOTECA TULIO PAIM
@@ -40,6 +42,7 @@ int tree_largura(node * root);
 void tree_preOrdem(tree * root);
 void tree_inOrdem(tree * root);
 void tree_posOrdem(tree * root);
+void tree_print_lvl(tree * root, int lvl);
 
 
 //MAIN
@@ -47,15 +50,23 @@ void tree_posOrdem(tree * root);
 int main(){
 
     int tmp;
-    tree * teste = tree_start();
-    printf("Adicione elementos à arvore:\n");
-    while(1){
-        scanf("%d", &tmp);
-        if(tmp == 0) break;
-        tree_inserir(teste, tmp);
-    }
+    tree * root1 = tree_start();
+    srand(time(NULL));
 
-    //TESTE
+    for(int i=0;i<30;i++){
+      tree_inserir(root1, rand() % 1000);
+    }
+    printf("Arvore 1:\n");
+    tree_print_lvl(root1,0);
+
+    tree * root2 = tree_start();
+
+    for(int i=0;i<30;i++){
+      tree_inserir(root2, rand() % 1000);
+    }
+    printf("\n\n\nArvore 2:\n");
+    tree_print_lvl(root2,0);
+    
 
     return 0;
 }
@@ -230,6 +241,27 @@ void tree_posOrdem(tree * root) {
     printf("%d ", (*root)->value);
   }
 }
+
+//IMPRIMIR POR NIVEIS
+
+void tree_print_lvl(tree * root, int lvl){
+  if((*root) != NULL){
+
+    /*chama direita*/
+    tree_print_lvl(&(*root)->right, lvl+1);
+
+    /*imprime*/
+    int i;
+    for(i = 0; i < lvl; i++) printf((i==0) ? "  " : "-- ");
+    printf("%d\n",(*root)->value);
+
+    /*chama esquerda*/
+    tree_print_lvl(&(*root)->left, lvl+1);
+
+  }
+}
+
+
 
 //FREE
 //LIBERAR MEMORIA ALOCADA
