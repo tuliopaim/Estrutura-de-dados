@@ -126,7 +126,8 @@ void fix_dat_shit(tree root, node pt){
 				gparent->color = true;	//avo = red
 				parent->color = false;	//pai = preto
 				uncle->color = false;	//tio = preto
-				pt = gparent;			//pt aponta pro vo
+				pt = gparent;			//pt aponta pro vo}
+
 			}
 			//se o tio for preto (ou nulo)
 			else{
@@ -139,8 +140,8 @@ void fix_dat_shit(tree root, node pt){
 
 				//filho for a esquerda
 				right_rotate(root, gparent);
-				gparent->color = true;
-				parent->color = false;
+				gparent->color = !(gparent->color);
+				parent->color = !(parent->color);
 				pt = parent;
 			}
 		}
@@ -165,8 +166,8 @@ void fix_dat_shit(tree root, node pt){
 				}
 				//se for filho direito
 				left_rotate(root, gparent);
-				gparent->color = true;
-				parent->color = false;
+				gparent->color = !(gparent->color);
+				parent->color = !(parent->color);
 				pt = parent;
 			}
 		}
@@ -229,21 +230,15 @@ int main(){
 	tree root1 = new_tree();
 	srand(time(NULL));
 
-	for(i=0;i<30;i++){
-		insert(root1,rand() % 1000);
+	for(i=0;i<10;i++){
+		int temp; //= rand() % 1000;
+		scanf("%d", &temp);
+		if(!temp) break;
+		printf("%d ", temp);
+		insert(root1,temp);
 	}
-	printf("Arvore 1: \n");
+	printf("\n\nArvore 1: \n");
 	rb_print_lvl(*root1,0);
-
-
-	tree root2 = new_tree();
-
-	for(i=0;i<30;i++){
-		insert(root2,rand() % 1000);
-	}
-	printf("\n\n\nArvore 2: \n");
-	rb_print_lvl(*root2,0);
-
 
 	return 0;
 }
