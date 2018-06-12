@@ -42,7 +42,7 @@ node * lista_atIndex(node * lista, int index){
         node * tmp = lista;
         for(int i = 0; i < index; i++){
             if(tmp==NULL){
-                printf("Essa posição não existe animal lista_atIndex()\n");
+                printf("Essa posição não existe animal\n");
                 return 0;
             }
             tmp = tmp->prox;
@@ -71,9 +71,9 @@ void lista_imprime(node * lista){
     if(!lista_isEmpty(lista)){
         node * tmp = lista->prox;
         while(tmp!=NULL){
-            printf("%d",tmp->data);
+            printf("%d ",tmp->data);
             tmp = tmp->prox;
-        }
+        }printf("\n");
     }
 }
 
