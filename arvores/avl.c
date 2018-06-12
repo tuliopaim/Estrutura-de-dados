@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <time.h>
 
 typedef struct _node{
 	int key;
@@ -163,12 +163,12 @@ int main(){
 	int temp, i;
 	node root1 = NULL;
 
-	//srand(time(NULL));
+	srand(time(NULL));
 
-	for(i=0;i<10;i++){
-		int temp; //= rand() % 1000;
-		scanf("%d", &temp);
-		if(!temp) break;
+	for(i=0;i<20;i++){
+		int temp = rand() % 1000;
+		//scanf("%d", &temp);
+		//if(!temp) break;
 		printf("%d ", temp);
 		root1 = avl_insert(root1,temp);
 	}
