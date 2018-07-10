@@ -37,6 +37,8 @@ void tree_remove(tree * root, int value);
 int tree_altura(tree * root);
 int larguraLvl(node * root, int level);
 int tree_largura(node * root);
+int somaFolha(tree * root);
+int somaInterno(tree * root);
 
 //percursos
 void tree_preOrdem(tree * root);
@@ -209,6 +211,35 @@ int tree_largura(node * root){
   }
   return largura;
 }
+
+//SOMA NÓS
+//SOMAR NÓS FOLHA
+
+int somaFolha(tree * root){
+  if((*root)==NULL) return 0;
+  if((*root)->left == NULL && (*root)->right == NULL){
+    return (*root)->value;
+  }
+  int cont = 0;
+  cont+=somaFolha(&(*root)->left);
+  cont+=somaFolha(&(*root)->right);
+  return cont;
+}
+
+
+//SOMAR NÓS NÃO-FOLHA
+int somaInterno(tree * root){
+  if((*root)==NULL || ((*root)->left == NULL && (*root)->right == NULL)){
+    //printf("%d descartado\n", (*root)->value);
+    return 0;
+  }
+  int cont = (*root)->value;;
+  //printf("Cont += %d\n", (*root)->value);
+  cont+=somaInterno(&(*root)->left);
+  cont+=somaInterno(&(*root)->right);
+  return cont;
+}
+
 
 
 //IMPRIMIR
